@@ -1,0 +1,102 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>org.insurity.glp.automation</groupId>
+	<artifactId>TestNG</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>jar</packaging>
+
+	<name>TestNG</name>
+	<url>http://maven.apache.org</url>
+
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<selenium-java.version>3.14.0</selenium-java.version>
+	</properties>
+
+	<repositories>
+		<repository>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+			<id>bintray-epam-reportportal</id>
+			<name>bintray</name>
+			<url>http://dl.bintray.com/epam/reportportal</url>
+		</repository>
+	</repositories>
+
+	<dependencies>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>3.8.1</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.seleniumhq.selenium</groupId>
+			<artifactId>selenium-java</artifactId>
+			<version>${selenium-java.version}</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/com.epam.reportportal/agent-java-testng -->
+<!-- <dependency>
+    <groupId>com.epam.reportportal</groupId>
+    <artifactId>agent-java-testng</artifactId>
+    <version>3.0.1</version>
+</dependency> -->
+		
+		<dependency>
+			<groupId>com.epam.reportportal</groupId>
+			<artifactId>agent-java-testng</artifactId>
+			<version>5.1.0-RC-1</version>
+		</dependency>
+		<dependency>
+			<groupId>com.epam.reportportal</groupId>
+			<artifactId>logger-java-log4j</artifactId>
+			<version>5.0.3</version>
+		</dependency>
+		<!-- <dependency>
+			<groupId>com.epam.reportportal</groupId>
+			<artifactId>client-java</artifactId>
+			<version>5.0.11</version>
+		</dependency> -->
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>2.16</version>
+				<configuration>
+
+					<!-- Uncomment it if you don't want your build to be failed in case 
+						of test errors -->
+					<!-- <testFailureIgnore>true</testFailureIgnore> <suiteXmlFiles> <xmlFile>suites/logging_tests.xml</xmlFile> 
+						</suiteXmlFiles> ADD working directory to get TestNG know we to find suite 
+						files <workingDirectory>./</workingDirectory> -->
+
+					<properties>
+						<property>
+							<name>usedefaultlisteners</name>
+							<value>false</value>
+						</property>
+						<property>
+							<name>listener</name>
+							<value>com.epam.reportportal.testng.ReportPortalTestNGListener</value>
+						</property>
+					</properties>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.8.1</version>
+			</plugin>
+		</plugins>
+	</build>
+</project>
